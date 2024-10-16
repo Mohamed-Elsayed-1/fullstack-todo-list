@@ -6,9 +6,10 @@ import { useForm } from "react-hook-form";
 import { InputErrorMsg } from "../InputErrorMsg";
 import axiosInstance from "../config/axios.config";
 import { toast } from "react-hot-toast";
-
+import Cookies from "js-cookie";
 
 export const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -16,15 +17,20 @@ export const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
-      const response = await axiosInstance.post("/login", data, {
+      const res = await axiosInstance.post("/login", data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      toast.success('Login successfully!')
-    } catch (err) {
-      console.log(err);
+      if (res.status === 200) toast.success("Login successfully!");
+      Cookies.set("Token", res.data.token);
+      location.replace('/')
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -47,7 +53,7 @@ export const Login = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         {inputs}
-        <Button title="Login" />
+        <Button isLoading={isLoading}>Login</Button>
       </form>
     </div>
   );

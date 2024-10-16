@@ -7,14 +7,24 @@ import { Layout } from "../pages/Layout";
 import { Home } from "../components/Home";
 import { Register } from "../components/Register/Register";
 import { Login } from "../components/Login/Login";
+import PrivateRoute from "./PrivateRoute";
+import Cookies from "js-cookie";
+const isAuth = () => {
+  const token = Cookies.get("Token");
+  return token;
+};
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<Layout />}>
-        <Route index element={<h1>Home</h1>} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={<PrivateRoute isAuth={isAuth()} path={"/login"} />}>
+          <Route index element={<Home />} />
+        </Route>
+        <Route element={<PrivateRoute isAuth={!isAuth()} path={"/"} />}>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
       </Route>
     </>
   )

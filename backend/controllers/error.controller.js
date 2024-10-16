@@ -2,6 +2,7 @@
 
 const duplicate = (error) => {
   const message = error.keyValue.username || error.keyValue.email;
+  error.statusCode = 400
   return (error.message = `${message} is already exist Please select another value`);
 };
 
