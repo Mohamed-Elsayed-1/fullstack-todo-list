@@ -14,12 +14,14 @@ export const Home = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        const boxes = data.data.map((el) => (
-          <Fragment key={el._id}>
-            <TodoBox key={el.id} title={el.title} />
-          </Fragment>
-        ));
-        setTodoBoxes(boxes);
+        if (data) {
+          const boxes = data.data.map((el) => (
+            <Fragment key={el._id}>
+              <TodoBox key={el.id} title={el.title} />
+            </Fragment>
+          ));
+          setTodoBoxes(boxes);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -29,5 +31,15 @@ export const Home = () => {
     }
   }, [token]);
 
-  return <div className="mt-5">{todoBoxes}</div>;
+  return (
+    <div className="mt-5">
+      {todoBoxes.length > 0 ? (
+        todoBoxes
+      ) : (
+        <h3 className="text-center text-gray-500 text-lg font-semibold">
+          Todo Not Found
+        </h3>
+      )}
+    </div>
+  );
 };

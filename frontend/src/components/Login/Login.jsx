@@ -24,9 +24,14 @@ export const Login = () => {
           "Content-Type": "application/json",
         },
       });
-      if (res.status === 200) toast.success("Login successfully!");
+      if (res.status === 200)
+        toast.success("Login successfully!", {
+          duration: 1000,
+        });
       Cookies.set("Token", res.data.token);
-      location.replace('/')
+      setTimeout(() => {
+        location.replace("/");
+      }, 1000);
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {

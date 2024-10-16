@@ -24,13 +24,11 @@ export const Navbar = () => {
           ) : (
             <li>
               <NavLink
-                to="/"
                 onClick={() => {
-                  Cookies.remove("Token");
                   setTimeout(()=>{
-
+                    Cookies.remove("Token");
                     location.replace(pathname);
-                  },1500)
+                  },1000)
                 }}
               >
                 Logout
