@@ -44,13 +44,7 @@ exports.Login = asyncHandler(async (req, res, next) => {
   }
   const user = await User.findOne({ email }).select("+password");
   if (!user || !(await user.correctPassword(password, user.password))) {
-    return next(
-      AppError.create(
-        "Incorrect email or password. Try login by another way",
-        "error",
-        401
-      )
-    );
+    return next(AppError.create("Incorrect email or password", "error", 401));
   }
   const token = await signToken(user._id);
   res.status(200).json({
@@ -94,13 +88,13 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-
-
 exports.updatePassword = asyncHandler(async (req, res, next) => {
   const oldPassword = req.body.oldPassword;
   const user = await User.findById(req.user._id).select("+password");
   if (!(await user.correctPassword(oldPassword, user.password))) {
-    return next(AppError.create("Your current password is wrong.", 'Error', 401));
+    return next(
+      AppError.create("Your current password is wrong.", "Error", 401)
+    );
   }
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
@@ -108,9 +102,8 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
 
   const token = await signToken(user._id);
   res.status(200).json({
-    status: 'Success',
+    status: "Success",
     token,
     message: "Password updated",
   });
 });
-
