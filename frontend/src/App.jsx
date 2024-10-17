@@ -7,10 +7,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <Toaster position="top-right" reverseOrder={true} />
-    </QueryClientProvider>
+    <div className="w-5/12 mx-auto">
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <Toaster position="top-right" reverseOrder={true} />
+      </QueryClientProvider>
+    </div>
   );
 }
 

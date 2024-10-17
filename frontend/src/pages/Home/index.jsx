@@ -1,21 +1,18 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import { TodoBox } from "./TodoBox";
-import axiosInstance from "../../components/config/axios.config";
 import Cookies from "js-cookie";
-import { useQuery } from "@tanstack/react-query";
+import { useCustomQuery } from "../../hooks/useCustomQuery";
+import { Modal } from "../../components/ui/Modal";
 
 export const Home = () => {
-  const [todoBoxes, setTodoBoxes] = useState([]);
   const token = Cookies.get("Token");
-  const { isLoading, data, error } = useQuery({
+  const { isLoading, data } = useCustomQuery({
     queryKey: ["todos"],
-    queryFn: async () => {
-      const { data } = await axiosInstance.get("/todo", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return data.data;
+    url: "/todo",
+    config: {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
   });
   if (isLoading)
@@ -45,7 +42,7 @@ export const Home = () => {
     );
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 space-y-1">
       {data ? (
         data.map((el) => (
           <Fragment key={el._id}>

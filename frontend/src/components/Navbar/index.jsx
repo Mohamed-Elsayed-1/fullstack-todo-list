@@ -8,7 +8,7 @@ export const Navbar = () => {
   const { pathname } = useLocation();
   return (
     <nav>
-      <div className="w-5/12 m-auto mt-8 bg-indigo-600 text-white min-h-20 flex justify-between items-center gap-3 px-3 rounded-lg">
+      <div className="mt-8 bg-indigo-600 text-white min-h-20 flex justify-between items-center gap-3 px-3 rounded-lg">
         <NavLink to="/" className="text-lg font-semibold">
           Home
         </NavLink>

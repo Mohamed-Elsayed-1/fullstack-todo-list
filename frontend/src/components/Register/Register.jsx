@@ -3,7 +3,7 @@ import { Input } from "../ui/Input";
 import { Button } from "../ui/Button";
 import { useForm } from "react-hook-form";
 import { InputErrorMsg } from "../InputErrorMsg";
-import axiosInstance from "../config/axios.config";
+import axiosInstance from "../../config/axios.config";
 import { Register_Form } from "../../data";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +49,7 @@ export const Register = () => {
     );
   });
   return (
-    <div className="w-5/12 m-auto py-10">
+    <div className="py-10">
       <h1 className="text-3xl text-center font-semibold mb-6">
         Register to get access!
       </h1>

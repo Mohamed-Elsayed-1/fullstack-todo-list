@@ -4,7 +4,7 @@ import { Button } from "../ui/Button";
 import { Login_Form } from "../../data";
 import { useForm } from "react-hook-form";
 import { InputErrorMsg } from "../InputErrorMsg";
-import axiosInstance from "../config/axios.config";
+import axiosInstance from "../../config/axios.config";
 import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 
@@ -51,7 +51,7 @@ export const Login = () => {
   ));
 
   return (
-    <div className="w-5/12 m-auto py-10">
+    <div className="py-10">
       <h1 className="text-3xl text-center font-semibold mb-6">Login!</h1>
       <form
         className="space-y-4 w-5/6 mx-auto"

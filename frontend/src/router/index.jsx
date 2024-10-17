@@ -18,7 +18,7 @@ const isAuth = () => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout />} >
         <Route element={<PrivateRoute isAuth={isAuth()} path={"/login"} />}>
           <Route index element={<Home />} />
           <Route path="/profile" element={<Profile />} />
