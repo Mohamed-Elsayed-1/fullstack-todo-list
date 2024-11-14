@@ -5,6 +5,7 @@ import { FaCircleUser } from "react-icons/fa6";
 
 export const Navbar = () => {
   const token = Cookies.get("Token");
+  const user = JSON.parse(Cookies.get("User"));
   const { pathname } = useLocation();
   return (
     <nav>
@@ -25,7 +26,7 @@ export const Navbar = () => {
           ) : (
             <>
               <li>
-                <NavLink to='/profile'>
+                <NavLink to={`/profile/${user._id}`}>
                   <FaCircleUser className="text-2xl" />
                 </NavLink>
               </li>

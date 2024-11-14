@@ -21,7 +21,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Layout />} >
         <Route element={<PrivateRoute isAuth={isAuth()} path={"/login"} />}>
           <Route index element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Route>
         <Route element={<PrivateRoute isAuth={!isAuth()} path={"/"} />}>
           <Route path="/register" element={<Register />} />

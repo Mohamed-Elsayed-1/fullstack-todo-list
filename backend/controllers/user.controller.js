@@ -50,6 +50,7 @@ exports.Login = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     status: "Success",
     token,
+    user
   });
 });
 
@@ -65,28 +66,6 @@ exports.getCurrentUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.updateUser = asyncHandler(async (req, res, next) => {
-  const { id } = req.params;
-  const { username, street, city } = req.body;
-  const user = await User.findById(id);
-  if (!user) {
-    return next(AppError.create("User not found", "Error", 404));
-  }
-
-  user.username = username;
-  user.address = {
-    street,
-    city,
-  };
-  await user.save({ validateBeforeSave: false });
-  const token = await signToken(user._id);
-  res.status(200).json({
-    status: "Success",
-    message: "User updated",
-    token,
-    user,
-  });
-});
 
 exports.updatePassword = asyncHandler(async (req, res, next) => {
   const oldPassword = req.body.oldPassword;

@@ -16,10 +16,11 @@ export const TodoBox = ({ todo,setReFetch }) => {
     setIsOpenDelete(true)
   }
   return (
-    <div className="flex justify-between items-center flex-wrap rounded-lg p-3 odd:bg-gray-200 hover:bg-gray-300">
+    <div className="flex justify-between items-center gap-3 flex-wrap rounded-lg p-3 odd:bg-gray-200 hover:bg-gray-300">
       <h2 className="flex-1 text-xl ">{todo.title}</h2>
       <div className="flex gap-2">
         <Button
+          
           bgColor={"bg-indigo-600"}
           customPadding={"5px 1.1rem"}
           customFont={"14px"}

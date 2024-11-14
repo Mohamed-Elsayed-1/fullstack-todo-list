@@ -9,9 +9,9 @@ router.route("/register").post(userController.Register);
 
 // router.route("/user").put(jwtParse, userController.updatePassword);
 
-// router
-//   .route("/user/:id")
-//   .get(userController.getCurrentUser)
+router
+  .route("/user/:id")
+  .get(userController.getCurrentUser)
 //   .put(jwtParse, validateUser, userController.updateUser);
 
 

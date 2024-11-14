@@ -29,6 +29,7 @@ export const Login = () => {
           duration: 1000,
         });
       Cookies.set("Token", res.data.token);
+      Cookies.set("User", JSON.stringify(res.data.user));
       setTimeout(() => {
         location.replace("/");
       }, 1000);
@@ -58,7 +59,9 @@ export const Login = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         {inputs}
-        <Button isLoading={isLoading}>Login</Button>
+        <Button isLoading={isLoading} type="submit">
+          Login
+        </Button>
       </form>
     </div>
   );

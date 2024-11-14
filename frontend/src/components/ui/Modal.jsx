@@ -92,7 +92,7 @@ export const Modal = ({ isOpen, setIsOpen, todo, setReFetch }) => {
               />
             </div>
             <div className="flex gap-4 justify-center">
-              <Button isLoading={isLoading}>Save</Button>
+              <Button isLoading={isLoading} type="submit">Save</Button>
               <Button
                 onClick={() => setIsOpen(false)}
                 bgColor={"rgb(107 114 128 / var(--tw-bg-opacity))"}

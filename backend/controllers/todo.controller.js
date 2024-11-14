@@ -15,13 +15,26 @@ exports.createTodo = asyncHandler(async (req, res, next) => {
 
 exports.getAllTodo = asyncHandler(async (req, res, next) => {
   const id = req.user._id;
-  const todo = await Todo.find({ user: id });
-  if (todo.length==0) {
-    return next(AppError.create("Todo not found", "Error", 400));
+
+
+  const page = parseInt(req.query.page) || 1; 
+  const limit = parseInt(req.query.limit) || 10; 
+  const skip = (page - 1) * limit; 
+  
+  const todos = await Todo.find({ user: id }).skip(skip).limit(limit);
+  const totalTodos = await Todo.countDocuments({ user: id }); 
+  const totalPages = Math.ceil(totalTodos / limit); 
+
+  if (todos.length === 0) {
+    return next(AppError.create("Todos not found", "Error", 400));
   }
+
   res.status(200).json({
     message: "Success",
-    data: todo,
+    data: todos,
+    page,
+    totalPages,
+    totalTodos,
   });
 });
 

@@ -1,8 +1,9 @@
 import React from "react";
 
-export const Button = ({ children, isLoading,bgColor,customPadding,customFont, ...rest}) => {
+export const Button = ({type='button', children, isLoading,bgColor,customPadding,customFont, ...rest}) => {
   return (
     <button
+      type={type}
       className="bg-indigo-600  text-white text-lg p-3 rounded-lg w-full mx-auto flex items-center justify-center disabled:cursor-not-allowed disabled:bg-indigo-400 disabled:hover:bg-indigo-400"
       disabled={isLoading}
       {...rest}

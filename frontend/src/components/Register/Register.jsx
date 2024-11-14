@@ -58,7 +58,7 @@ export const Register = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         {inputs}
-        <Button isLoading={isLoading}>Register</Button>
+        <Button type='submit' isLoading={isLoading}>Register</Button>
       </form>
     </div>
   );
